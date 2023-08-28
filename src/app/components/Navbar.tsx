@@ -5,7 +5,9 @@ import Link from 'next/link';
 const menuItems = [
     { label: 'Home', url: '/' },
     { label: 'About', url: '/about' },
-    { label: 'Contact Us', url: '#contact' }
+    { label: 'Contact Us', url: '#contact' },
+    { label: 'Login', url: '/login' }, // change later
+
 ]
 
 export default function Navbar() {
