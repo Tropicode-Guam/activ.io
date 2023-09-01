@@ -25,3 +25,37 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* img.leaflet-tile.leaflet-tile-loaded {
+  position: absolute;
+} */
+
+#map {
+  overflow: hidden;
+  width: 100%;
+  height: 80vh;
+}
+
+div.leaflet-popup-content-wrapper {
+  padding: 1px 0px 1px 1px
+}
+
+div.leaflet-popup-content {
+  margin: 0;
+}
+
+.bubble {
+  font-size: 6pt;
+  word-wrap: normal;
+  width: 150px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+div.bubble p {
+  margin: .3em 0;
+}
+
+.bubble .content {
+  margin: 5px;
+}
