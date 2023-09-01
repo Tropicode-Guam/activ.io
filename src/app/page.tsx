@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import Map from './components/Map'
 
 const API_BASE = process.env.API_BASE
 
@@ -10,6 +11,7 @@ export default async function Home() {
     <div>
       <h1>Hello World</h1>
       <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+      <Map points={places}/>
       <ul>
         {
           places.map((place: { id: number; title: string }) => (
