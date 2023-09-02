@@ -24,7 +24,6 @@ export default function Map({ points }:
 }) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
-    const poppedOut = useRef<L.Marker | null>(null)
 
     const mapParams: L.MapOptions = {
         center: L.latLng(13.443, 144.7707),
@@ -94,20 +93,12 @@ export default function Map({ points }:
                     <div>
                 </div>
             `);
-            marker.on('mouseover', e => {
-                if (marker != poppedOut.current) {
-                    poppedOut.current = marker
-                    marker.openPopup()
-                }
-            })
         });
     }, [])
 
     //eventhandler
     useEffect(() => {
-        mapRef.current!.on('click', () => {
-            poppedOut.current = null
-        })
+
     }, [])
 
     return (
