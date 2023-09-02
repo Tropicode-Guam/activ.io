@@ -6,6 +6,7 @@ import Image from 'next/image';
 import ReactDOMServer from 'react-dom/server';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { FaDirections } from 'react-icons/fa';
 
 const MAP_TILE = L.tileLayer(
     `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`,
@@ -20,8 +21,16 @@ interface IconMap {
 }
 
 export default function Map({ points }: 
-    { id: number, title: string, desc: string, pos: number[], img: string, type: string
-}) {
+    { 
+        id: number, 
+        title: string, 
+        desc: string, 
+        pos: number[], 
+        img: string, 
+        type: string, 
+        state: string
+    }
+) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
 
@@ -87,7 +96,15 @@ export default function Map({ points }:
                     height={100}></Image>) +
                     `<div class="content">` + 
                         ReactDOMServer.renderToString(
-                            <Link href={'/places/' + p.id}><b>{p.title}</b></Link>
+                            <div className='bubble-title-container'>
+                                <Link href={'/places/' + p.id}><b>{p.title}</b></Link>
+                                <a
+                                    target='_blank'
+                                    href={`https://maps.google.com?q=${(p.title + ' ' + p.state).split(' ').join('+')}`}
+                                >
+                                    <FaDirections />
+                                </a>
+                            </div>
                         ) +   
                     `   <p>${p.desc}...</p>
                     <div>

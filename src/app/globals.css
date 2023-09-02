@@ -59,3 +59,8 @@ div.bubble p {
 .bubble .content {
   margin: 5px;
 }
+
+.bubble-title-container {
+  display: flex;
+  justify-content: space-between;
+}
