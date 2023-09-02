@@ -83,7 +83,7 @@ export default function Map({ points }:
                 + ReactDOMServer.renderToString(<Image 
                     src={p.img} 
                     alt={p.title} 
-                    width={150} 
+                    width={225} 
                     height={100}></Image>) +
                     `<div class="content">` + 
                         ReactDOMServer.renderToString(

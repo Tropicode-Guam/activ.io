@@ -45,9 +45,9 @@ div.leaflet-popup-content {
 }
 
 .bubble {
-  font-size: 6pt;
+  font-size: 9pt;
   word-wrap: normal;
-  width: 150px;
+  width: 225px;
   overflow: hidden;
   border-radius: 10px;
 }
