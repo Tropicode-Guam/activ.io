@@ -15,9 +15,12 @@ const MAP_TILE = L.tileLayer(
     }
 );
 
+interface IconMap {
+    [key: string]: L.Icon | undefined
+}
 
 export default function Map({ points }: 
-    { id: number, title: string, desc: string, pos: number[], img: string 
+    { id: number, title: string, desc: string, pos: number[], img: string, type: string
 }) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
@@ -58,13 +61,22 @@ export default function Map({ points }:
 
     //markers
     useEffect(() => {
-        const icon = L.icon({
-            iconUrl: 'marker.png',
-            iconSize: [20, 35],
-            iconAnchor: [10, 35],
-            popupAnchor: [0, -5]
-        })
-        points.forEach(p => {
+        const icons: IconMap = {
+            hike: L.icon({
+                iconUrl: 'hike_marker.png',
+                iconSize: [20, 35],
+                iconAnchor: [10, 35],
+                popupAnchor: [0, -5]
+            }),
+            default: L.icon({
+                iconUrl: 'marker.png',
+                iconSize: [20, 35],
+                iconAnchor: [10, 35],
+                popupAnchor: [0, -5]
+            })
+        }
+        points.forEach((p: { type: string ; pos: L.LatLngExpression; img: string ; title: string; id: number; desc: string; }) => {
+            const icon = (icons as any)[p.type] ?? icons.default;
             const marker = L.marker(p.pos, {icon: icon}).addTo(mapRef.current!)
             
             marker.bindPopup(`
