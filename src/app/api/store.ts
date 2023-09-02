@@ -1,4 +1,4 @@
-export const places = [
+const placesChoices = [
     {
         "id": 0,
         "title": "Pagat Caves",
@@ -40,3 +40,16 @@ export const places = [
         "img": "https://bloximages.newyork1.vip.townnews.com/guampdn.com/content/tncms/assets/v3/editorial/e/47/e47b253e-33c9-11ed-a72c-837e99bd1241/632129cd4b94f.image.jpg?resize=1396%2C1028"
     },
 ]
+
+export const places = Array(60).fill(null).map((_, i) => {
+    let choice = placesChoices[Math.floor(Math.random()*placesChoices.length)]
+    const origin = [13.443, 144.7707]
+    const t = (Math.random() - 0.5) * 2;
+    const y = t * .1
+    const x = (Math.random() - 0.5) * .15 + t * .1
+    return {
+        ...choice,
+        pos: [origin[0]+x, origin[1]+y],
+        id: i
+    }
+})
