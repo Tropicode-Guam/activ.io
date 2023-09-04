@@ -20,30 +20,34 @@ interface IconMap {
     [key: string]: L.Icon | undefined
 }
 
-export default function Map({ points }: 
-    { 
-        id: number, 
-        title: string, 
-        desc: string, 
-        pos: number[], 
-        img: string, 
-        type: string, 
-        state: string
-    }
+export interface Point { 
+  id: number, 
+  title: string, 
+  desc: string, 
+  pos: L.LatLngTuple, 
+  img: string, 
+  type: string, 
+  state: string
+}
+
+interface MapProps {
+    points: Point[]
+}
+
+export default function Map({ points }: MapProps
 ) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
 
-    const mapParams: L.MapOptions = {
-        center: L.latLng(13.443, 144.7707),
-        zoom: 11,
-        zoomControl: false,
-        maxBounds: L.latLngBounds(L.latLng(-150, -240), L.latLng(150, 240)),
-        layers: [MAP_TILE]
-    }
-
     // init
     useEffect(() => {
+        const mapParams: L.MapOptions = {
+            center: L.latLng(13.443, 144.7707),
+            zoom: 11,
+            zoomControl: false,
+            maxBounds: L.latLngBounds(L.latLng(-150, -240), L.latLng(150, 240)),
+            layers: [MAP_TILE]
+        }
         mapRef.current = L.map('map', mapParams)
         return () => {
             if (mapRef.current) {
@@ -83,7 +87,7 @@ export default function Map({ points }:
                 popupAnchor: [0, -5]
             })
         }
-        points.forEach((p: { type: string ; pos: L.LatLngExpression; img: string ; title: string; id: number; desc: string; }) => {
+        points.forEach((p: Point) => {
             const icon = (icons as any)[p.type] ?? icons.default;
             const marker = L.marker(p.pos, {icon: icon}).addTo(mapRef.current!)
             
@@ -111,7 +115,7 @@ export default function Map({ points }:
                 </div>
             `);
         });
-    }, [])
+    }, [points])
 
     //eventhandler
     useEffect(() => {
