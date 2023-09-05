@@ -40,6 +40,7 @@ export default function Map({ points }: MapProps
 ) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
+    const firstRender = useRef(false);
 
     // init
     useEffect(() => {
@@ -91,10 +92,11 @@ export default function Map({ points }: MapProps
                 popupAnchor: [0, -5]
             })
         }
-        points.forEach((p: Point) => {
+        let chosenPoint = Math.floor(Math.random()*points.length)
+        points.forEach((p: Point, i: number) => {
             const icon = (icons as any)[p.type] ?? icons.default;
             const marker = L.marker(p.pos, {icon: icon}).addTo(mapRef.current!)
-            
+
             marker.bindPopup(`
                 <div class="bubble">`
                 + ReactDOMServer.renderToString(<Image 
@@ -118,6 +120,11 @@ export default function Map({ points }: MapProps
                     <div>
                 </div>
             `);
+
+            if (!firstRender.current && chosenPoint==i) {
+                marker.openPopup()
+                firstRender.current = true
+            }
         });
     }, [points])
 
