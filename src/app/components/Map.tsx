@@ -7,6 +7,8 @@ import ReactDOMServer from 'react-dom/server';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { FaDirections } from 'react-icons/fa';
+import { GestureHandling } from "leaflet-gesture-handling";
+
 
 const MAP_TILE = L.tileLayer(
     `https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png`,
@@ -46,8 +48,10 @@ export default function Map({ points }: MapProps
             zoom: 11,
             zoomControl: false,
             maxBounds: L.latLngBounds(L.latLng(-150, -240), L.latLng(150, 240)),
-            layers: [MAP_TILE]
+            layers: [MAP_TILE],
+            gestureHandling: true
         }
+        L.Map.addInitHook("addHandler", "gestureHandling", GestureHandling);
         mapRef.current = L.map('map', mapParams)
         return () => {
             if (mapRef.current) {
