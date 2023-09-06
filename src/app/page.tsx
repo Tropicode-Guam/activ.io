@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import Map from './components/Map'
 import { Point } from './components/Map'
@@ -10,8 +9,6 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>Hello World</h1>
-      <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
       <Map points={places}/>
       <ul>
         {
