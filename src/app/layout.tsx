@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className='flex flex-col h-screen justify-between'>
           <Navbar />
-          <main className='h-10 mb-auto'>{children}</main>
+          <main className='mb-auto'>{children}</main>
           <Footer />
         </div>
       </body>
