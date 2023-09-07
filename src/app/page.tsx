@@ -20,7 +20,7 @@ export default async function Home() {
                         <Image className="w-full" src={place.img} alt={place.title} width={400} height={100}/>
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2">{place.title}</div>
-                            <p className="text-gray-700 text-base card-desc" >{place.desc}
+                            <p className="text-gray-700 text-base card-desc" >{place.desc}...
                             </p>
                         </div>
                         <div className="px-6 pt-4 pb-2">
