@@ -16,7 +16,7 @@ export default async function Home() {
           places.map((place: Point ) => (
             <li key={place.id}>
                 <Link href={"/places/" + place.id}>
-                    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                    <div className="max-w-sm rounded overflow-hidden shadow-lg dark:bg-zinc-800">
                         <Image className="w-full" src={place.img} alt={place.title} width={400} height={100}/>
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2">{place.title}</div>
