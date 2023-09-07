@@ -62,3 +62,7 @@ div.bubble p {
   display: flex;
   justify-content: space-between;
 }
+
+.card:hover {
+  transform: scale(1.02);
+}
