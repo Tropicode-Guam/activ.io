@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <div className="mx-auto">
       <Map points={places}/>
-      <ul className="grid justify-items-center gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <ul className="grid justify-items-center gap-8 mt-8 mx-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {
           places.map((place: Point ) => (
             <li key={place.id}>
