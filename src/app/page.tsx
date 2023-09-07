@@ -11,7 +11,6 @@ export default async function Home() {
 
   return (
     <div className="mx-auto">
-      <div id="top" className='spacer'></div>
       <div className='overlay-container'>
         <Overlay />
       </div>
