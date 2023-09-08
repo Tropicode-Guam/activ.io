@@ -6,15 +6,20 @@ import Overlay from './components/Overlay'
 
 const API_BASE = process.env.API_BASE
 
+async function getUsersLocation() {
+  return [13.443, 144.7707];
+}
+
 export default async function Home() {
   const places: Point[] = await fetch(API_BASE + '/places').then((res) => res.json())
+  const center: number[] = await getUsersLocation(); 
 
   return (
     <div className="mx-auto">
       <div className='overlay-container'>
         <Overlay />
       </div>
-      <Map points={places}/>
+      <Map points={places} center={center}/>
       <div className="flap-container">
         <div className="flap"></div>
       </div>
