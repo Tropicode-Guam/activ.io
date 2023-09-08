@@ -15,6 +15,9 @@ export default async function Home() {
         <Overlay />
       </div>
       <Map points={places}/>
+      <div className="flap-container">
+        <div className="flap"></div>
+      </div>
       <ul className="grid justify-items-center gap-8 mt-8 mx-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {
           places.map((place: Point ) => (
