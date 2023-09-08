@@ -33,19 +33,23 @@ export interface Point {
 }
 
 interface MapProps {
-    points: Point[]
+    points: Point[],
+    center: number[]
 }
 
-export default function Map({ points }: MapProps
+export default function Map({ points, center }: MapProps
 ) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
     const firstRender = useRef(false);
+    const initialMarker = useRef<L.Marker | null>(null)
+    const [scroll, setScroll] = useState(0)
+    const [popupClosed, setPopupClosed] = useState(false)
 
     // init
     useEffect(() => {
         const mapParams: L.MapOptions = {
-            center: L.latLng(13.443, 144.7707),
+            center: L.latLng(center[0], center[1]),
             zoom: 11,
             zoomControl: false,
             maxBounds: L.latLngBounds(L.latLng(-150, -240), L.latLng(150, 240)),
@@ -92,7 +96,8 @@ export default function Map({ points }: MapProps
                 popupAnchor: [0, -5]
             })
         }
-        let chosenPoint = Math.floor(Math.random()*points.length)
+        const chosenPoint = Math.floor(Math.random()*points.length)
+
         points.forEach((p: Point, i: number) => {
             const icon = (icons as any)[p.type] ?? icons.default;
             const marker = L.marker(p.pos, {icon: icon}).addTo(mapRef.current!)
@@ -123,10 +128,27 @@ export default function Map({ points }: MapProps
 
             if (!firstRender.current && chosenPoint==i) {
                 marker.openPopup()
+                initialMarker.current = marker
                 firstRender.current = true
             }
         });
     }, [points])
+
+    useEffect(() => {
+        function handleScroll(e) {
+            setScroll(window.scrollY)
+            if (window.scrollY>5) {
+                if (!popupClosed) {
+                    setPopupClosed(true)
+                    initialMarker.current?.closePopup()
+                }
+            }
+        }
+        document.addEventListener('scroll', handleScroll)
+        return () => {
+            document.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     //eventhandler
     useEffect(() => {
