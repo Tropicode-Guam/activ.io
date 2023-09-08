@@ -71,12 +71,13 @@ div.bubble p {
   margin-top: -10vh;
   z-index: -1;
   position: absolute;
+  top: -5px;
   box-shadow: 4px 1px 8px 2px black;
 }
 
 .flap-container {
   width: 100vw;
-  overflow-x: hidden;
+  overflow: hidden;
   margin-bottom: -15vh;
   height: 20vh;
   position: relative;
