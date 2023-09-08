@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Point } from './components/Map'
 import Map from './components/Map'
 import Image from "next/image";
+import Overlay from './components/Overlay'
 
 const API_BASE = process.env.API_BASE
 
@@ -10,6 +11,9 @@ export default async function Home() {
 
   return (
     <div className="mx-auto">
+      <div className='overlay-container'>
+        <Overlay />
+      </div>
       <Map points={places}/>
       <ul className="grid justify-items-center gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {

@@ -38,6 +38,10 @@ export default function Map({ points }: MapProps
 ) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
+    const firstRender = useRef(false);
+    const initialMarker = useRef<L.Marker | null>(null)
+    const [scroll, setScroll] = useState(0)
+    const [popupClosed, setPopupClosed] = useState(false)
 
     // init
     useEffect(() => {
@@ -87,7 +91,10 @@ export default function Map({ points }: MapProps
                 popupAnchor: [0, -5]
             })
         }
-        points.forEach((p: Point) => {
+
+        const chosenPoint = Math.floor(Math.random()*points.length)
+
+        points.forEach((p: Point, i: number) => {
             const icon = (icons as any)[p.type] ?? icons.default;
             const marker = L.marker(p.pos, {icon: icon}).addTo(mapRef.current!)
             
@@ -114,8 +121,30 @@ export default function Map({ points }: MapProps
                     <div>
                 </div>
             `);
+
+            if (!firstRender.current && chosenPoint==i) {
+                marker.openPopup()
+                initialMarker.current = marker
+                firstRender.current = true
+            }
         });
     }, [points])
+
+    useEffect(() => {
+        function handleScroll(e) {
+            setScroll(window.scrollY)
+            if (window.scrollY>5) {
+                if (!popupClosed) {
+                    setPopupClosed(true)
+                    initialMarker.current?.closePopup()
+                }
+            }
+        }
+        document.addEventListener('scroll', handleScroll)
+        return () => {
+            document.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     //eventhandler
     useEffect(() => {

@@ -62,3 +62,52 @@ div.bubble p {
   display: flex;
   justify-content: space-between;
 }
+
+.banner {
+  z-index: 1002;
+  width: 100%;
+}
+
+.spacer {
+  position: relative;
+  top: 0;
+  height: calc(1rem + 36px);
+  width: 100%;
+}
+
+.header-overlay {
+  width: 100%;
+  height: 80vh;
+  background: rgba(0,0,0,.3);
+  position: absolute;
+  top: 0;
+  z-index: 1001;
+  transition: top 0.5s ease-in-out;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.header-overlay.away {
+  top: -80vh;
+}
+
+.overlay-container {
+  position: relative;
+  top: 0
+}
+
+.header-title {
+  font-size: 24pt;
+  width: 100%;
+}
+
+#header-button {
+  border: 2px solid white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
