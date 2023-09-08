@@ -31,10 +31,11 @@ export interface Point {
 }
 
 interface MapProps {
-    points: Point[]
+    points: Point[],
+    center: number[]
 }
 
-export default function Map({ points }: MapProps
+export default function Map({ points, center }: MapProps
 ) {
     const mapRef = useRef<L.Map | null>(null)
     const markerRefs = useRef<L.Marker[]>([])
@@ -46,7 +47,7 @@ export default function Map({ points }: MapProps
     // init
     useEffect(() => {
         const mapParams: L.MapOptions = {
-            center: L.latLng(13.443, 144.7707),
+            center: L.latLng(center[0], center[1]),
             zoom: 11,
             zoomControl: false,
             maxBounds: L.latLngBounds(L.latLng(-150, -240), L.latLng(150, 240)),
