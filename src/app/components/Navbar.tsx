@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 
 const menuItems = [
-    { label: 'Home', url: '/' },
+    { label: 'Home', url: '/#top' },
     { label: 'About', url: '/about' },
     { label: 'Contact Us', url: '#contact' },
     { label: 'Login', url: '/login' }, // change later
@@ -12,9 +12,9 @@ const menuItems = [
 
 export default function Navbar() {
     return (
-        <header className="flex flex-col gap-5 bg-lime-200">
+        <header className="fixed banner flex flex-col gap-5 bg-lime-200">
             <div className="py-2 flex items-center place-content-between mx-4">
-                <Link href="/">
+                <Link href="/#top">
                     <Image
                         width={40}
                         height={40}
