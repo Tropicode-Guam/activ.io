@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
 
@@ -11,7 +10,7 @@ export default function Overlay() {
     const router = useRouter();
 
     useEffect(() => {
-        function handleScroll(e) {
+        function handleScroll(e: Event) {
             setScroll(window.scrollY)
             if (window.scrollY>0) {
                 setOverlayAway(true)
@@ -36,8 +35,10 @@ export default function Overlay() {
             <div className="spacer"></div>
             <h1 className="text-center header-title">Activ.io</h1>
             <button id="header-button" onClick={() => {
-                window.scroll(0,6)
-                setOverlayAway(true)
+                if (typeof window !== "undefined") {
+                    window.scroll(0,6)
+                    setOverlayAway(true)
+                }
             }}>V</button>
         </div>
     )

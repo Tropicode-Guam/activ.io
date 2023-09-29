@@ -10,6 +10,14 @@ async function getUsersLocation() {
   return [13.443, 144.7707];
 }
 
+// lazy loading map for now until russ' api done
+import dynamic from 'next/dynamic';
+
+const DynamicMap = dynamic(() => import('./components/Map'), {
+  ssr: false,
+  loading: () => <div id='map'></div>
+});
+
 export default async function Home() {
   const places: Point[] = await fetch(API_BASE + '/places').then((res) => res.json())
   const center: number[] = await getUsersLocation(); 
@@ -19,7 +27,8 @@ export default async function Home() {
       <div className='overlay-container'>
         <Overlay />
       </div>
-      <Map points={places} center={center}/>
+      <DynamicMap center={center} points={places} />
+      {/* <Map center={center} points={places} /> */}
       <div className="flap-container">
         <div className="flap"></div>
       </div>
@@ -29,7 +38,7 @@ export default async function Home() {
             <li key={place.id}>
                 <Link href={"/places/" + place.id}>
                     <div className="card max-w-sm rounded overflow-hidden shadow-lg dark:bg-zinc-800">
-                        <Image className="w-full" src={place.img} alt={place.title} width={400} height={100}/>
+                        <Image className="w-full" src={place.img} alt={place.title} width={400} height={100} priority={true}/>
                         <div className="px-6 py-4">
                             <div className="font-bold text-xl mb-2">{place.title}</div>
                             <p className="text-gray-700 text-base card-desc" >{place.desc}...
