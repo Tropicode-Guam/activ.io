@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  with-docker-multi-env-production:
+    build:
+      context: ../../
+      dockerfile: docker/production/Dockerfile
+      args:
+        HOST: ${HOST}
+    image: with-docker-multi-env-production
+    environment:
+      - VIRTUAL_HOST=${HOST}
+      - VIRTUAL_PORT=3000
+    networks:
+      - proxy-network
+
+  nginx:
+    image: nginxproxy/nginx-proxy:latest
+    container_name: nginx-proxy
+    restart: always
+    depends_on:
+      - with-docker-multi-env-production
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs
+      - share:/usr/share/nginx/html
+    networks:
+      - proxy-network
+
+  certbot:
+    restart: always
+    image: nginxproxy/acme-companion:latest
+    volumes_from:
+      - nginx
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - acme:/etc/adme.sh
+    networks:
+      - proxy-network
+    environment:
+      - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
+
+volumes:
+  vhost:
+  share:
+  certs:
+  acme:
+
+networks:
+  proxy-network:
