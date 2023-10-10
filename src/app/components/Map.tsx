@@ -46,6 +46,9 @@ export default function Map({ points, center }: MapProps) {
 
 	// init
 	useEffect(() => {
+		if (mapRef.current) {
+			return
+		}
 		const mapParams: L.MapOptions = {
 			center: L.latLng(center[0], center[1]),
 			zoom: 11,
@@ -64,7 +67,7 @@ export default function Map({ points, center }: MapProps) {
 				mapRef.current.remove();
 			}
 		};
-	}, []);
+	}, [center]);
 
 	//control
 	useEffect(() => {
@@ -158,7 +161,7 @@ export default function Map({ points, center }: MapProps) {
 		return () => {
 			document.removeEventListener("scroll", handleScroll);
 		};
-	}, []);
+	}, [popupClosed]);
 
 	//eventhandler
 	useEffect(() => {}, []);

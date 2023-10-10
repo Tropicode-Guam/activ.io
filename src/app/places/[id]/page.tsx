@@ -1,17 +1,28 @@
 const API_BASE = process.env.API_BASE
+import { places } from '../../api/store'
+
+interface Place {
+    id: number,
+    title: string,
+    desc: string,
+    pos: [number, number],
+    type: string,
+    state: string,
+    img: string,
+}
 
 export async function generateStaticParams() {
-    // use environment variables for api url in the future
-    const postIds = await fetch(API_BASE + '/places').then((res) => res.json())
-
-    return postIds.map((id: number) => ({ id: `${id}` }))
+    const response = await fetch(API_BASE + '/places', { next: { revalidate: 60 } })
+    // console.log(await response.text())
+    const postIds = await response.json()
+    return postIds.map(({ id }: Place) => ({ id: `${id}` }))
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
 
-    console.log(params.id)
+    const response = await fetch(`${API_BASE}/places/${params.id}`, { next: { revalidate: 60 } })
 
-    const { id, title, desc } = await fetch(`${API_BASE}/places/${params.id}`).then((res) => res.json())
+    const { id, title, desc } = await response.json()
     
     return (
         <>
