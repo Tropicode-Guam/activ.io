@@ -8,6 +8,9 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
+
+    console.log(params.id)
+
     const { id, title, desc } = await fetch(`${API_BASE}/places/${params.id}`).then((res) => res.json())
     
     return (
