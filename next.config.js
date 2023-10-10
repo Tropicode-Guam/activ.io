@@ -7,8 +7,7 @@ const nextConfig = {
             'i.ytimg.com',
             'www.guam.co.kr'
         ]
-    },
-    output: 'standalone'
+    }
 }
 
 module.exports = nextConfig
