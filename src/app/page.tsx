@@ -19,7 +19,7 @@ const DynamicMap = dynamic(() => import('./components/Map'), {
 });
 
 export default async function Home() {
-  const places: Point[] = await fetch(API_BASE + '/places').then((res) => res.json())
+  const places: Point[] = await fetch(API_BASE + '/places', { next: { revalidate: 60 } }).then((res) => res.json())
   const center: number[] = await getUsersLocation(); 
 
   return (
