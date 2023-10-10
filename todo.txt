@@ -1,9 +1,0 @@
-
-gpt simplify components for me w pseudocode comments
-fix component red errors
-fix favicon
-fix console errors
-get whole app hosted on aws, check nick
-launch to reddit asap
-checkout stroll guam for local devs
-learn how to ssh into aws ubuntu, like sivers
