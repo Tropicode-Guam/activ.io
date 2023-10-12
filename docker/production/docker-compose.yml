@@ -2,12 +2,7 @@ version: '3'
 
 services:
   with-docker-multi-env-production:
-    build:
-      context: ../../
-      dockerfile: docker/production/Dockerfile
-      args:
-        HOST: ${HOST}
-    image: with-docker-multi-env-production
+    image: ghcr.io/tropicode-guam/blue-guam:${TAG:-main}
     environment:
       - VIRTUAL_HOST=${HOST}
       - VIRTUAL_PORT=3000
