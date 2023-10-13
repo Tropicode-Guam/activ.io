@@ -32,4 +32,10 @@ start-production: ## Start the production docker container.
 
 .PHONY: stop-production
 stop-production: ## Stop the production docker container.
-	docker compose -f docker/production/docker-compose.yml down
+
+	docker-compose -f docker/production/docker-compose.yml down
+
+.PHONY: check-pr
+check-pr: ## run export in (subshell) to not dirty environment
+	docker pull ghcr.io/tropicode-guam/blue-guam:pr-$(pr)
+	(export TAG="pr-$(pr)"; docker compose -f docker/production/docker-compose.yml up)

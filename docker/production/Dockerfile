@@ -21,9 +21,14 @@ RUN \
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
+# copy over .env.production if it exists
+COPY . .env.productio[n] ./
+
+ARG API_BASE
+
+# overwrite .env.production if API_BASE is given
+RUN if [ ! -z "${API_BASE}" ]; then echo "API_BASE=${API_BASE}" > .env.production; fi
 # This will do the trick, use the corresponding env file for each environment.
-COPY .env.production .env.production
 RUN yarn build
 
 # 3. Production image, copy all the files and run next
