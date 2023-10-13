@@ -1,13 +1,8 @@
 version: '3'
 
 services:
-  with-docker-multi-env-production:
-    build:
-      context: ../../
-      dockerfile: docker/production/Dockerfile
-      args:
-        HOST: ${HOST}
-    image: with-docker-multi-env-production
+  frontend:
+    image: ghcr.io/tropicode-guam/blue-guam:${TAG:-main}
     environment:
       - VIRTUAL_HOST=${HOST}
       - VIRTUAL_PORT=3000
@@ -19,7 +14,7 @@ services:
     container_name: nginx-proxy
     restart: always
     depends_on:
-      - with-docker-multi-env-production
+      - frontend
     ports:
       - "80:80"
       - "443:443"
