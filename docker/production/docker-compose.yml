@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  frontend:
+  with-docker-multi-env-production:
     image: ghcr.io/tropicode-guam/blue-guam:${TAG:-main}
     environment:
       - VIRTUAL_HOST=${HOST}
