@@ -9,5 +9,5 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - VIRTUAL_HOST=${HOST}
+      - VIRTUAL_HOST=${HOST:-localhost}
       - VIRTUAL_PORT=3000
