@@ -44,5 +44,5 @@ start-network:
 	docker compose -f docker/production/docker-compose.network.yml up -d
 
 .PHONY: stop-network
-start-network:
+stop-network:
 	docker compose -f docker/production/docker-compose.network.yml down
