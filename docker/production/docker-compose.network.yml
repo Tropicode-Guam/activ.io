@@ -13,8 +13,10 @@ services:
       - vhost:/etc/nginx/vhost.d
       - certs:/etc/nginx/certs
       - share:/usr/share/nginx/html
-    networks:
-      - proxy-network
+networks:
+  port-proxy:
+    name: dinosaur
+    external: true
 
   certbot:
     restart: always

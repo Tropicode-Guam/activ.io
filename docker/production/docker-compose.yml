@@ -7,6 +7,7 @@ services:
       - VIRTUAL_HOST=${HOST}
       - LETSENCRYPT_HOST=${HOST}
       - VIRTUAL_PORT=3000
+      - LISTEN_PORT=8080
     networks:
       - production_proxy-network
 
