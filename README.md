@@ -10,8 +10,8 @@ Visit our website: [blueguam.com](https://blueguam.com)
 
 ### Development
 
-Make a `.env.development` file with an `API_BASE` variable ex:
-`API_BASE=https://path/to/api`
+Make a `.env.development` file with an `NEXT_PUBLIC_API_BASE` variable ex:
+`NEXT_PUBLIC_API_BASE=https://path/to/api`
 
 for hot-reloading:  
 `npm run dev`
