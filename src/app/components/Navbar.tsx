@@ -6,6 +6,7 @@ const menuItems = [
     { label: 'Home', url: '/#top' },
     { label: 'About', url: '/about' },
     { label: 'Contact Us', url: '#contact' },
+    { label: 'New Place', url: '/new_place' },
     { label: 'Login', url: '/login' }, // change later
 
 ]

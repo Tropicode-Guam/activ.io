@@ -84,7 +84,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-              API_BASE=${{ secrets.API_BASE }}      
+              NEXT_PUBLIC_API_BASE=${{ secrets.NEXT_PUBLIC_API_BASE }}      
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
