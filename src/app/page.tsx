@@ -4,7 +4,7 @@ import Map from './components/Map'
 import Image from "next/image";
 import Overlay from './components/Overlay'
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE
+const API_BASE = process.env.API_BASE
 
 async function getUsersLocation() {
   return [13.443, 144.7707];
