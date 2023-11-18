@@ -1,6 +1,6 @@
 'use client'
 
-const API_BASE = process.env.API_BASE
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE
 
 async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
