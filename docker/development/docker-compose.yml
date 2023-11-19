@@ -11,3 +11,10 @@ services:
     environment:
       - VIRTUAL_HOST=${HOST:-localhost}
       - VIRTUAL_PORT=3000
+      - VIRTUAL_PATH=/
+    networks:
+      - production_proxy-network
+
+networks:
+  production_proxy-network:
+    external: true
